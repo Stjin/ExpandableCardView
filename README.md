@@ -138,4 +138,4 @@ If you liked this library, why don't you offer me or Allesandro a coffee (or a b
 
 ETH (Alessandro): 0x70b6b9eaCDf6f76ECb92bE3fb81d72B3971BA1Bc
 
-Paypal (Stjinchan (me)): [Donate](paypal.me/Stjinchan)
+Paypal (Stjinchan (me)): [Donate](https://paypal.me/Stjinchan)
