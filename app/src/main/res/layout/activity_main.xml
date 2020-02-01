@@ -36,63 +36,64 @@
 
 <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
-    android:paddingBottom="20dp"
-    android:orientation="vertical"
-    android:clipChildren="false"
-    tools:context="com.alessandrosperotti.expandablecardviewexample.MainActivity"
-    android:background="#FAFAFA">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:clipChildren="false"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
 
+        <host.stjin.expandablecardview.ExpandableCardView
+            android:id="@+id/main_profile_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            app:expandOnClick="true"
+            app:expandableCardRipple="true"
+            app:expandableCardRadius="100"
+            app:expandableCardStrokeWidth="15"
+            app:expandableCardElevation="70"
+            app:expandableCardStrokeColor="@color/colorAccent"
+            app:icon="@drawable/ic_person"
+            app:inner_view="@layout/passengers"
+            app:title="Passengers" />
 
-<com.alespero.expandablecardview.ExpandableCardView
-    android:id="@+id/main_profile_card"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:title="Passengers"
-    app:icon="@drawable/ic_person"
-    app:inner_view="@layout/passengers"
-    app:expandOnClick="true" />
+        <host.stjin.expandablecardview.ExpandableCardView
+            android:id="@+id/main_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            app:expandOnClick="true"
+            app:expandableCardElevation="200"
+            app:icon="@drawable/ic_location"
+            app:inner_view="@layout/location"
+            app:title="Location" />
 
-    <com.alespero.expandablecardview.ExpandableCardView
-        android:id="@+id/main_location"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:title="Location"
-        app:icon="@drawable/ic_location"
-        app:inner_view="@layout/location"
-        app:expandOnClick="true"/>
+        <host.stjin.expandablecardview.ExpandableCardView
+            android:id="@+id/main_dates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            app:animationDuration="900"
+            app:expandOnClick="true"
+            app:icon="@drawable/ic_dates"
+            app:expandableCardArrowColor="@color/colorAccent"
+            app:inner_view="@layout/dates"
+            app:title="Calendar" />
 
-    <com.alespero.expandablecardview.ExpandableCardView
-        android:id="@+id/main_dates"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:title="Calendar"
-        app:icon="@drawable/ic_dates"
-        app:inner_view="@layout/dates"
-        app:expandOnClick="true"
-        app:animationDuration="900"/>
-
-</LinearLayout>
+    </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

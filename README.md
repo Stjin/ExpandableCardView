@@ -1,6 +1,6 @@
 # ExpandableCardView
 
-[ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.8) ](https://bintray.com/alespero/ExpandableCardView/ExpandableCardView/0.8/link)
+[ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.8) ](https://jitpack.io/#Stjinchan/ExpandableCardView/)
 
 ![Example Gif](demo.gif)
 
@@ -21,17 +21,17 @@ Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=
 First of all, include the dependency in your app build.gradle:
 
 ```gradle
-compile 'com.alespero:expandable-cardview:0.8'
+compile 'host.stjin:expandable-cardview:0.8'
 ```
 
-Or get the aar in the [Releases](https://github.com/AleSpero/ExpandableCardView/releases) section.
+Or get the aar in the [Releases](https://github.com/Stjinchan/ExpandableCardView/releases) section.
 
 ## Declaring the view
 
 After you have the Library correctly setup, just declare the ExpandableCardView in your xml:
 
 ```xml
-<com.alespero.expandablecardview.ExpandableCardView
+<host.stjin.expandablecardview.ExpandableCardView
     android:id="@+id/profile"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -40,6 +40,7 @@ After you have the Library correctly setup, just declare the ExpandableCardView 
     app:inner_view="@layout/mycustomview"
     app:expandOnClick="true"
     app:animationDuration="300"
+    app:cardStrokeWidth="2dp"
     app:startExpanded="false"/>
 ```
 The only required attributes are `inner_view` and `title`. The other attributes are optional.
@@ -115,7 +116,7 @@ This library is still in its early stages, so feel free to contribute. I will re
 ```
 
 ## Author
-Made By [Alessandro Sperotti](www.alessandrosperotti.com). 
+Forked project, Made By [Alessandro Sperotti](www.alessandrosperotti.com). 
 
 alessandrosperotti at gmail dot com
 

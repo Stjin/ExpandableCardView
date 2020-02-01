@@ -1,4 +1,4 @@
-package com.alessandrosperotti.expandablecardviewexample
+package host.stjin.expandablecardviewexample
 
 import org.junit.Test
 

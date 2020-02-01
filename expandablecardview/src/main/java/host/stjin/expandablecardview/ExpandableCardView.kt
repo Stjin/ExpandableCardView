@@ -1,24 +1,22 @@
-package com.alespero.expandablecardview
+package host.stjin.expandablecardview
 
 
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.os.Build
-import androidx.core.content.ContextCompat
 import android.text.TextUtils
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.view.animation.Transformation
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import com.alespero.expandablecardview.R.id.card_header
-import com.alespero.expandablecardview.R.id.card_title
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.expandable_cardview.view.*
 
 /**
@@ -40,6 +38,7 @@ import kotlinx.android.synthetic.main.expandable_cardview.view.*
  *
  * Created by alessandros on 23/02/2018.
  * Modified by Adrian Devezin on 24/12/2018.
+ * Modified by Stjin on 01/02/2020.
  * @author Alessandro Sperotti
  */
 
@@ -51,6 +50,12 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     private var typedArray: TypedArray? = null
     private var innerViewRes: Int = 0
+    private var cardStrokeColor: Int = android.R.color.transparent
+    private var cardArrowColor: Int = android.R.color.darker_gray
+    private var cardStrokeWidth: Int = 0
+    private var cardRadius: Float = 4f
+    private var cardElevation: Float = 4f
+    private var cardRipple: Boolean = false
     private var iconDrawable: Drawable? = null
 
     var animDuration = DEFAULT_ANIM_DURATION.toLong()
@@ -99,6 +104,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         expandOnClick = typedArray.getBoolean(R.styleable.ExpandableCardView_expandOnClick, false)
         animDuration = typedArray.getInteger(R.styleable.ExpandableCardView_animationDuration, DEFAULT_ANIM_DURATION).toLong()
         startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false)
+        cardRipple = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardRipple, false)
+        cardStrokeColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeColor, android.R.color.transparent)
+        cardArrowColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardArrowColor, android.R.color.black)
+        cardStrokeWidth = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeWidth, 0)
+        cardElevation = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardElevation, 4f)
+        cardRadius = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardRadius, 4f)
+
         typedArray.recycle()
     }
 
@@ -106,7 +118,20 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         super.onFinishInflate()
 
         //Setting attributes
-        if (! TextUtils.isEmpty(title)) card_title.text = title
+        if (!TextUtils.isEmpty(title)) card_title.text = title
+        if (cardStrokeColor != 0) card_layout.strokeColor = cardStrokeColor
+        if (cardStrokeWidth != 0) card_layout.strokeWidth = cardStrokeWidth
+        if (!cardRipple) card_layout.rippleColor = ContextCompat.getColorStateList(context, android.R.color.transparent)
+
+
+        card_layout.radius = Utils.convertPixelsToDp(cardRadius, context)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            card_layout.cardElevation = Utils.convertPixelsToDp(cardElevation, context)
+        }
+
+        if (cardArrowColor != android.R.color.black) card_arrow.setColorFilter(cardArrowColor, android.graphics.PorterDuff.Mode.SRC_IN)
+
 
         iconDrawable?.let { drawable ->
             card_header.visibility = View.VISIBLE
@@ -114,9 +139,6 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         }
 
         setInnerView(innerViewRes)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            elevation = Utils.convertDpToPixels(context, 4f)
 
         if (startExpanded) {
             animDuration = 0
@@ -130,13 +152,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     }
 
-    fun expand() {
+    private fun expand() {
         val initialHeight = card_layout.height
-        if (! isMoving) {
+        if (!isMoving) {
             previousHeight = initialHeight
         }
 
-        card_layout.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
         val targetHeight = card_layout.measuredHeight
 
         if (targetHeight - initialHeight != 0) {
@@ -146,7 +168,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         }
     }
 
-    fun collapse() {
+    private fun collapse() {
         val initialHeight = card_layout.measuredHeight
         if (initialHeight - previousHeight != 0) {
             animateViews(initialHeight,
@@ -208,7 +230,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         isCollapsing = animationType == COLLAPSING
 
         startAnimation(expandAnimation)
-        Log.d("SO", "Started animation: " + if (animationType == EXPANDING) "Expanding" else "Collapsing")
+        //Log.d("SO", "Started animation: " + if (animationType == EXPANDING) "Expanding" else "Collapsing")
         card_arrow.startAnimation(arrowAnimation)
         isExpanded = animationType == EXPANDING
 

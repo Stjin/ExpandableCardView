@@ -1,4 +1,4 @@
-package com.alessandrosperotti.expandablecardviewexample
+package host.stjin.expandablecardviewexample
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -9,6 +9,7 @@ import android.widget.Toast
 import android.content.Intent
 import android.net.Uri
 import android.view.MenuItem
+import com.alessandrosperotti.expandablecardviewexample.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.location.*
 
@@ -49,19 +50,19 @@ class MainActivity : AppCompatActivity() {
         when(item?.itemId){
 
             R.id.aboutme -> {
-                uri = Uri.parse("https://www.alessandrosperotti.com")
+                uri = Uri.parse("https://stjin.host")
                 intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
 
             R.id.getlibrary -> {
-                uri = Uri.parse("https://github.com/AleSpero/ExpandableCardView")
+                uri = Uri.parse("https://github.com/Stjinchan/ExpandableCardView")
                 intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
 
             R.id.myotherapps -> {
-                uri = Uri.parse("market://search?q=alessandro%20sperotti")
+                uri = Uri.parse("https://stjin.host")
                 intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
