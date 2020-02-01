@@ -57,6 +57,20 @@ Done! Now your ExpandableCardView is ready to roll.
 
 If you want some basic Expandable Card without any custom behaviour, setting the view in the XML is enough. Otherwise just declare your ExpandableCardView in your Activity/Fragment and you're ready to use its methods.
 
+
+## Styling
+```
+app:expandOnClick="true"
+app:expandableCardRipple="true"
+app:expandableCardRadius="100"
+app:expandableCardStrokeWidth="15"
+app:expandableCardElevation="70"
+app:expandableCardStrokeColor="@color/colorAccent"
+app:expandableCardArrowColor="@color/colorAccent"
+app:animationDuration="900"
+app:startExpanded="true"
+```
+
 ### Java
 ```java
 ExpandableCardView card = findViewById(R.id.profile);
@@ -120,6 +134,7 @@ Forked project, Made By [Alessandro Sperotti](www.alessandrosperotti.com).
 
 alessandrosperotti at gmail dot com
 
-If you liked this library, why don't you offer me a coffee (or a beer? :D)
+If you liked this library, why don't you offer me or Allesandro a coffee (or a beer? :D)
 
-ETH: 0x70b6b9eaCDf6f76ECb92bE3fb81d72B3971BA1Bc
+ETH (Alessandro): 0x70b6b9eaCDf6f76ECb92bE3fb81d72B3971BA1Bc
+Paypal (Stjinchan (me)): [Donate](paypal.me/Stjinchan)

@@ -60,6 +60,9 @@
             app:expandableCardStrokeWidth="15"
             app:expandableCardElevation="70"
             app:expandableCardStrokeColor="@color/colorAccent"
+            app:expandableCardArrowColor="@color/colorAccent"
+            app:animationDuration="900"
+            app:startExpanded="true"
             app:icon="@drawable/ic_person"
             app:inner_view="@layout/passengers"
             app:title="Passengers" />
