@@ -137,4 +137,5 @@ alessandrosperotti at gmail dot com
 If you liked this library, why don't you offer me or Allesandro a coffee (or a beer? :D)
 
 ETH (Alessandro): 0x70b6b9eaCDf6f76ECb92bE3fb81d72B3971BA1Bc
+
 Paypal (Stjinchan (me)): [Donate](paypal.me/Stjinchan)
