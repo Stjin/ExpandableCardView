@@ -5,12 +5,14 @@
         <attr name="icon" format="reference"/>
         <attr name="inner_view" format="reference"/>
         <attr name="expandOnClick" format="boolean"/>
+        <attr name="showSwitch" format="boolean"/>
         <attr name="animationDuration" format="integer"/>
         <attr name="startExpanded" format="boolean"/>
         <attr name="expandableCardRipple" format="boolean"/>
         <attr name="expandableCardStrokeWidth" format="integer"/>
         <attr name="expandableCardStrokeColor" format="reference"/>
         <attr name="expandableCardArrowColor" format="reference"/>
+        <attr name="expandableCardTitleColor" format="reference"/>
         <attr name="expandableCardElevation" format="float"/>
         <attr name="expandableCardRadius" format="integer"/>
     </declare-styleable>

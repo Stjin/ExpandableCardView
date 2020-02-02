@@ -1,6 +1,7 @@
 package host.stjin.expandablecardview
 
 
+import android.R.attr.button
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
@@ -10,14 +11,17 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.view.animation.Transformation
+import android.widget.CompoundButton
 import android.widget.LinearLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.expandable_cardview.view.*
+
 
 /**
  *
@@ -52,6 +56,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var innerViewRes: Int = 0
     private var cardStrokeColor: Int = android.R.color.transparent
     private var cardArrowColor: Int = android.R.color.darker_gray
+    private var cardTextColor: Int = android.R.color.darker_gray
     private var cardStrokeWidth: Int = 0
     private var cardRadius: Float = 4f
     private var cardElevation: Float = 4f
@@ -65,11 +70,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var isExpanding = false
     private var isCollapsing = false
     private var expandOnClick = false
+    private var showSwitch = false
     private var startExpanded = false
 
     private var previousHeight = 0
 
     private var listener: OnExpandedListener? = null
+    private var switchListener: OnSwitchChangeListener? = null
 
     private val defaultClickListener = OnClickListener {
         if (isExpanded)
@@ -77,6 +84,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         else
             expand()
     }
+
+    private val switchOnCheckedChangeListener = CompoundButton.OnCheckedChangeListener { p0, p1 -> switchListener?.onSwitchChanged(p0, p1) }
 
     private val isMoving: Boolean
         get() = isExpanding || isCollapsing
@@ -102,6 +111,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         iconDrawable = typedArray.getDrawable(R.styleable.ExpandableCardView_icon)
         innerViewRes = typedArray.getResourceId(R.styleable.ExpandableCardView_inner_view, View.NO_ID)
         expandOnClick = typedArray.getBoolean(R.styleable.ExpandableCardView_expandOnClick, false)
+        showSwitch = typedArray.getBoolean(R.styleable.ExpandableCardView_showSwitch, false)
         animDuration = typedArray.getInteger(R.styleable.ExpandableCardView_animationDuration, DEFAULT_ANIM_DURATION).toLong()
         startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false)
         cardRipple = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardRipple, false)
@@ -110,6 +120,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         cardStrokeWidth = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeWidth, 0)
         cardElevation = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardElevation, 4f)
         cardRadius = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardRadius, 4f)
+        cardTextColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardTitleColor, android.R.color.darker_gray)
 
         typedArray.recycle()
     }
@@ -124,6 +135,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         if (!cardRipple) card_layout.rippleColor = ContextCompat.getColorStateList(context, android.R.color.transparent)
 
 
+        card_switch.visibility = if (showSwitch) View.VISIBLE else View.GONE
+        card_title.setTextColor(cardArrowColor)
         card_layout.radius = Utils.convertPixelsToDp(cardRadius, context)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -148,6 +161,10 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         if (expandOnClick) {
             card_layout.setOnClickListener(defaultClickListener)
             card_arrow.setOnClickListener(defaultClickListener)
+        }
+
+        if (showSwitch) {
+            card_switch.setOnCheckedChangeListener(switchOnCheckedChangeListener)
         }
 
     }
@@ -234,7 +251,38 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         card_arrow.startAnimation(arrowAnimation)
         isExpanded = animationType == EXPANDING
 
+
+        if (showSwitch) {
+            val switchAnimation = if (animationType == EXPANDING)
+                AlphaAnimation(1f, 0f)
+            else
+                AlphaAnimation(0f, 1f)
+            switchAnimation.duration = animDuration
+            switchAnimation.fillAfter = true
+            card_switch.startAnimation(switchAnimation)
+
+            // Disable/Set clickable to prevent the toggle from working when the card is expanded
+            switchAnimation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationRepeat(p0: Animation?) {
+                    //
+                }
+
+                override fun onAnimationEnd(p0: Animation?) {
+                    card_switch.isClickable = animationType != EXPANDING
+                    card_switch.isEnabled = animationType != EXPANDING
+                }
+
+                override fun onAnimationStart(p0: Animation?) {
+                    if (animationType != EXPANDING) {
+                        card_switch.isEnabled = animationType != EXPANDING
+                    }
+                    card_switch.isClickable = animationType != EXPANDING
+
+                }
+            })
+        }
     }
+
 
     fun setOnExpandedListener(listener: OnExpandedListener) {
         this.listener = listener
@@ -250,6 +298,24 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     fun removeOnExpandedListener() {
         this.listener = null
+    }
+
+
+    fun setOnSwitchChangeListener(listener: OnSwitchChangeListener) {
+        this.switchListener = listener
+    }
+
+    fun setOnSwitchChangeListener(method: (v: View?, isChecked: Boolean) -> Unit) {
+        this.switchListener = object : OnSwitchChangeListener {
+            override fun onSwitchChanged(v: View?, isChecked: Boolean) {
+                method(v, isChecked)
+            }
+
+        }
+    }
+
+    fun removeOnSwitchChangeListener() {
+        this.switchListener = null
     }
 
     fun setTitle(@StringRes titleRes: Int = -1, titleText: String = "") {
@@ -276,7 +342,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     }
 
 
-    override fun setOnClickListener(l: View.OnClickListener?) {
+    override fun setOnClickListener(l: OnClickListener?) {
         card_arrow.setOnClickListener(l)
         super.setOnClickListener(l)
     }
@@ -287,9 +353,11 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
      */
 
     interface OnExpandedListener {
-
         fun onExpandChanged(v: View?, isExpanded: Boolean)
+    }
 
+    interface OnSwitchChangeListener {
+        fun onSwitchChanged(v: View?, isChecked: Boolean)
     }
 
     companion object {

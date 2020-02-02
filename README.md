@@ -1,3 +1,8 @@
+## Before you try to use this library
+
+This library is forked and modified for the app [Cometin](https://cometin.stjin.host)
+I tried making the library as functional for others but there might be some elements you don't like.
+
 # ExpandableCardView
 
 [ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.8) ](https://jitpack.io/#Stjinchan/ExpandableCardView/)
@@ -69,6 +74,7 @@ app:expandableCardStrokeColor="@color/colorAccent"
 app:expandableCardArrowColor="@color/colorAccent"
 app:animationDuration="900"
 app:startExpanded="true"
+app:showSwitch="true"
 ```
 
 ### Java
@@ -98,12 +104,23 @@ card.setOnExpandedListener(new OnExpandedListener() {
         Toast.makeText(applicationContext, isExpanded ? "Expanded!" : "Collapsed!", Toast.LENGTH_SHORT).show();
     }
 });
+
+card.setOnSwitchChangeListener(new OnSwitchChangeListene() {
+    @Override
+    public void OnSwitchChangeListener(View v, boolean isChecked) {
+        Toast.makeText(applicationContext, isChecked ? "Checked!" : "Not checked!", Toast.LENGTH_SHORT).show();
+    }
+});
 ```
 ### Kotlin
 
 ```kotlin
 card.setOnExpandedListener { view, isExpanded ->
     Toast.makeText(applicationContext, if(isExpanded) "Expanded!" else "Collapsed!", Toast.LENGTH_SHORT).show()
+ }
+
+ card.setOnSwitchChangeListener { view, isChecked ->
+    Toast.makeText(applicationContext, if(isChecked) "Checked!" else "Not checked!", Toast.LENGTH_SHORT).show()
  }
 ```
 ## Contribute

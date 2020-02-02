@@ -37,6 +37,11 @@ class MainActivity : AppCompatActivity() {
             if(isExpanded) Toast.makeText(applicationContext, "Expanded!", Toast.LENGTH_SHORT).show()
             else Toast.makeText(applicationContext, "Collapsed!", Toast.LENGTH_SHORT).show()
         }
+
+        main_location.setOnSwitchChangeListener { _, isChecked ->
+            if(isChecked) Toast.makeText(applicationContext, "Checked!", Toast.LENGTH_SHORT).show()
+            else Toast.makeText(applicationContext, "not checked!", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
