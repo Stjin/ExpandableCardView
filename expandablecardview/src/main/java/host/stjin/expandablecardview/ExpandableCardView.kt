@@ -4,6 +4,7 @@ package host.stjin.expandablecardview
 import android.R.attr.button
 import android.content.Context
 import android.content.res.TypedArray
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.TextUtils
@@ -58,9 +59,11 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var cardArrowColor: Int = android.R.color.darker_gray
     private var cardTextColor: Int = android.R.color.darker_gray
     private var cardStrokeWidth: Int = 0
+    private var cardTitleSize: Float = 0f
     private var cardRadius: Float = 4f
     private var cardElevation: Float = 4f
     private var cardRipple: Boolean = false
+    private var expandableCardTitleBold: Boolean = false
     private var iconDrawable: Drawable? = null
 
     var animDuration = DEFAULT_ANIM_DURATION.toLong()
@@ -115,9 +118,11 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         animDuration = typedArray.getInteger(R.styleable.ExpandableCardView_animationDuration, DEFAULT_ANIM_DURATION).toLong()
         startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false)
         cardRipple = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardRipple, false)
+        expandableCardTitleBold = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardTitleBold, false)
         cardStrokeColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeColor, android.R.color.transparent)
         cardArrowColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardArrowColor, android.R.color.black)
         cardStrokeWidth = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeWidth, 0)
+        cardTitleSize = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardTitleSize, 0f)
         cardElevation = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardElevation, 4f)
         cardRadius = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardRadius, 4f)
         cardTextColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardTitleColor, android.R.color.darker_gray)
@@ -133,8 +138,12 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         if (cardTextColor != android.R.color.darker_gray) card_title.setTextColor(cardTextColor)
         if (cardStrokeColor != android.R.color.transparent) card_layout.strokeColor = cardStrokeColor
         if (cardStrokeWidth != 0) card_layout.strokeWidth = cardStrokeWidth
+        if (cardTitleSize != 0f) card_title.textSize = cardTitleSize
         if (!cardRipple) card_layout.rippleColor = ContextCompat.getColorStateList(context, android.R.color.transparent)
 
+        if (expandableCardTitleBold) {
+            card_title.setTypeface(null, Typeface.BOLD);
+        }
 
         card_switch.visibility = if (showSwitch) View.VISIBLE else View.GONE
         card_layout.radius = Utils.convertPixelsToDp(cardRadius, context)

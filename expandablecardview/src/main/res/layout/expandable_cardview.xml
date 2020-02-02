@@ -40,7 +40,7 @@
                 android:layout_toEndOf="@+id/card_icon"
                 android:maxLength="39"
                 android:maxLines="1"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 tools:text="Prova" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial

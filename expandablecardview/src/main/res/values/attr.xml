@@ -9,7 +9,9 @@
         <attr name="animationDuration" format="integer"/>
         <attr name="startExpanded" format="boolean"/>
         <attr name="expandableCardRipple" format="boolean"/>
+        <attr name="expandableCardTitleBold" format="boolean"/>
         <attr name="expandableCardStrokeWidth" format="integer"/>
+        <attr name="expandableCardTitleSize" format="float"/>
         <attr name="expandableCardStrokeColor" format="reference"/>
         <attr name="expandableCardArrowColor" format="reference"/>
         <attr name="expandableCardTitleColor" format="reference"/>

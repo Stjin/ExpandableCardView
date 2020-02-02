@@ -76,6 +76,8 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             app:expandOnClick="true"
+            app:expandableCardTitleBold="true"
+            app:expandableCardTitleSize="30"
             app:expandableCardTitleColor="@color/colorAccent"
             app:expandableCardElevation="200"
             app:icon="@drawable/ic_location"
