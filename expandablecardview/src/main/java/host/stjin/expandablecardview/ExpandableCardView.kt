@@ -130,13 +130,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
         //Setting attributes
         if (!TextUtils.isEmpty(title)) card_title.text = title
-        if (cardStrokeColor != 0) card_layout.strokeColor = cardStrokeColor
+        if (cardTextColor != android.R.color.darker_gray) card_title.setTextColor(cardTextColor)
+        if (cardStrokeColor != android.R.color.transparent) card_layout.strokeColor = cardStrokeColor
         if (cardStrokeWidth != 0) card_layout.strokeWidth = cardStrokeWidth
         if (!cardRipple) card_layout.rippleColor = ContextCompat.getColorStateList(context, android.R.color.transparent)
 
 
         card_switch.visibility = if (showSwitch) View.VISIBLE else View.GONE
-        card_title.setTextColor(cardArrowColor)
         card_layout.radius = Utils.convertPixelsToDp(cardRadius, context)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

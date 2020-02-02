@@ -76,10 +76,11 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             app:expandOnClick="true"
-            app:showSwitch="true"
+            app:expandableCardTitleColor="@color/colorAccent"
             app:expandableCardElevation="200"
             app:icon="@drawable/ic_location"
             app:inner_view="@layout/location"
+            app:showSwitch="true"
             app:title="Location" />
 
         <host.stjin.expandablecardview.ExpandableCardView
