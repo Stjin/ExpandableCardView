@@ -26,7 +26,7 @@ Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=
 First of all, include the dependency in your app build.gradle:
 
 ```gradle
-implementation 'com.github.Stjinchan:ExpandableCardView:1.1.1'
+implementation 'com.github.Stjinchan:ExpandableCardView:1.1.2'
 ```
 
 Or get the aar in the [Releases](https://github.com/Stjinchan/ExpandableCardView/releases) section.
