@@ -33,35 +33,43 @@
 
             <TextView
                 android:id="@+id/card_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toStartOf="@+id/LL_switch_button"
                 android:layout_toEndOf="@+id/card_icon"
                 android:maxLength="39"
                 android:maxLines="1"
+                android:singleLine="true"
                 android:textSize="18sp"
                 tools:text="Prova" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/card_switch"
+            <LinearLayout
+                android:id="@+id/LL_switch_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="8dp"
-                android:layout_toStartOf="@id/card_arrow" />
-
-            <ImageButton
-                android:id="@+id/card_arrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="20dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:contentDescription="@string/expandable_card_view_image_content_description"
-                android:src="@drawable/arrow_down"
-                android:tint="@android:color/black" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/card_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp" />
+
+                <ImageButton
+                    android:id="@+id/card_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/expandable_card_view_image_content_description"
+                    android:src="@drawable/arrow_down"
+                    android:tint="@android:color/black" />
+            </LinearLayout>
 
         </RelativeLayout>
 
