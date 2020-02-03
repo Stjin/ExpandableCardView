@@ -345,6 +345,10 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     }
 
+    fun setSwitch(boolean: Boolean){
+        card_switch.isChecked = boolean
+    }
+
     private fun setInnerView(resId: Int) {
         card_stub.layoutResource = resId
         innerView = card_stub.inflate()

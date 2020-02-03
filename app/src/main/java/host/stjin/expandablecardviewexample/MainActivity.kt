@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity() {
             if(isChecked) Toast.makeText(applicationContext, "Checked!", Toast.LENGTH_SHORT).show()
             else Toast.makeText(applicationContext, "not checked!", Toast.LENGTH_SHORT).show()
         }
+
+        main_location.setSwitch(true)
     }
 
 
