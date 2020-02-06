@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.location.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var uri : Uri
+    private lateinit var uri : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

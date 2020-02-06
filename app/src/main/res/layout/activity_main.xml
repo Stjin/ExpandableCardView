@@ -62,7 +62,6 @@
             app:expandableCardStrokeColor="@color/colorAccent"
             app:expandableCardArrowColor="@color/colorAccent"
             app:animationDuration="900"
-            app:startExpanded="true"
             app:icon="@drawable/ic_person"
             app:inner_view="@layout/passengers"
             app:title="Passengers" />
@@ -99,6 +98,21 @@
             app:expandableCardArrowColor="@color/colorAccent"
             app:inner_view="@layout/dates"
             app:title="Calendar" />
+
+        <host.stjin.expandablecardview.ExpandableCardView
+            android:id="@+id/main_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            app:animationDuration="900"
+            app:fullHeight="true"
+            app:expandOnClick="true"
+            app:icon="@drawable/ic_dates"
+            app:inner_view="@layout/test"
+            app:title="Lorem" />
 
     </LinearLayout>
 

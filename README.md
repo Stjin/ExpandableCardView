@@ -25,11 +25,23 @@ Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=
 
 First of all, include the dependency in your app build.gradle:
 
+### Stable
 ```gradle
 implementation 'com.github.Stjinchan:ExpandableCardView:1.1.2'
 ```
 
+### Beta
+```gradle
+implementation 'com.github.Stjinchan:ExpandableCardView:1.2.0-beta01'
+```
+
+```
+This is a beta, introducing ```app:fullHeight``` as a workaround for the [Innerview issue](https://github.com/AleSpero/ExpandableCardView/issues/9)
+I hope to fix this in the future and might remove this attribute
+```
+
 Or get the aar in the [Releases](https://github.com/Stjinchan/ExpandableCardView/releases) section.
+
 
 ## Declaring the view
 

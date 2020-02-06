@@ -1,7 +1,6 @@
 package host.stjin.expandablecardview
 
 
-import android.R.attr.button
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Typeface
@@ -12,6 +11,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
@@ -63,12 +63,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var cardRadius: Float = 4f
     private var cardElevation: Float = 4f
     private var cardRipple: Boolean = false
+    private var fullHeight: Boolean = false
     private var expandableCardTitleBold: Boolean = false
     private var iconDrawable: Drawable? = null
 
-    var animDuration = DEFAULT_ANIM_DURATION.toLong()
+    private var animDuration = DEFAULT_ANIM_DURATION.toLong()
 
-    var isExpanded = false
+    private var isExpanded = false
         private set
     private var isExpanding = false
     private var isCollapsing = false
@@ -118,6 +119,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         animDuration = typedArray.getInteger(R.styleable.ExpandableCardView_animationDuration, DEFAULT_ANIM_DURATION).toLong()
         startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false)
         cardRipple = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardRipple, false)
+        fullHeight = typedArray.getBoolean(R.styleable.ExpandableCardView_fullHeight, false)
         expandableCardTitleBold = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardTitleBold, false)
         cardStrokeColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeColor, android.R.color.transparent)
         cardArrowColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardArrowColor, android.R.color.black)
@@ -142,15 +144,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         if (!cardRipple) card_layout.rippleColor = ContextCompat.getColorStateList(context, android.R.color.transparent)
 
         if (expandableCardTitleBold) {
-            card_title.setTypeface(null, Typeface.BOLD);
+            card_title.setTypeface(null, Typeface.BOLD)
         }
 
         card_switch.visibility = if (showSwitch) View.VISIBLE else View.GONE
         card_layout.radius = Utils.convertPixelsToDp(cardRadius, context)
+        card_layout.cardElevation = Utils.convertPixelsToDp(cardElevation, context)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            card_layout.cardElevation = Utils.convertPixelsToDp(cardElevation, context)
-        }
 
         if (cardArrowColor != android.R.color.black) card_arrow.setColorFilter(cardArrowColor, android.graphics.PorterDuff.Mode.SRC_IN)
 
@@ -184,14 +184,48 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             previousHeight = initialHeight
         }
 
-        card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-        val targetHeight = card_layout.measuredHeight
+
+        val targetHeight = if (fullHeight) {
+            getFullHeight(card_layout)
+        } else{
+            card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+            card_layout.measuredHeight
+        }
 
         if (targetHeight - initialHeight != 0) {
             animateViews(initialHeight,
                     targetHeight - initialHeight,
                     EXPANDING)
         }
+    }
+
+    /***
+     * This function returns the actual height the layout. The getHeight() function returns the current height which might be zero if
+     * the layout's visibility is GONE
+     * @param layout
+     * @return
+     */
+    private fun getFullHeight(layout: ViewGroup): Int {
+        val specWidth = MeasureSpec.makeMeasureSpec(0 /* any */, MeasureSpec.UNSPECIFIED)
+        val specHeight = MeasureSpec.makeMeasureSpec(0 /* any */, MeasureSpec.UNSPECIFIED)
+        layout.measure(specWidth, specHeight)
+        var totalHeight = 0 //layout.getMeasuredHeight();
+        val initialVisibility = layout.visibility
+        layout.visibility = View.VISIBLE
+        val numberOfChildren = layout.childCount
+        for (i in 0 until numberOfChildren) {
+            val child = layout.getChildAt(i)
+            totalHeight += if (child is ViewGroup) {
+                getFullHeight(child)
+            } else {
+                val desiredWidth = MeasureSpec.makeMeasureSpec(layout.width,
+                        MeasureSpec.AT_MOST)
+                child.measure(desiredWidth, MeasureSpec.UNSPECIFIED)
+                child.measuredHeight
+            }
+        }
+        layout.visibility = initialVisibility
+        return totalHeight
     }
 
     private fun collapse() {

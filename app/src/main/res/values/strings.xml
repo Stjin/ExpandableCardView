@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Expandable CardView</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in nisi suscipit, semper purus imperdiet, eleifend dui. Maecenas ut mauris hendrerit, consectetur ipsum ut, fermentum metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum erat et pellentesque ornare. Morbi lectus dolor, mattis vel sem ac, imperdiet convallis eros. Nullam eu nunc sed mi semper pellentesque vel sit amet arcu. Mauris vehicula suscipit lorem, vel volutpat neque viverra a.</string>
 </resources>

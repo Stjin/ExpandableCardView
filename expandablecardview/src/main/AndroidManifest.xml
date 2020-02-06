@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="host.stjin.expandablecardview" />
+<manifest package="host.stjin.expandablecardview" />
