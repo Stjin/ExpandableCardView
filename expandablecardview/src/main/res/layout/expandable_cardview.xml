@@ -67,7 +67,7 @@
                     android:background="?selectableItemBackgroundBorderless"
                     android:contentDescription="@string/expandable_card_view_image_content_description"
                     android:src="@drawable/arrow_down"
-                    android:tint="@android:color/black" />
+                    android:tint="?attr/colorControlNormal" />
             </LinearLayout>
 
         </RelativeLayout>
