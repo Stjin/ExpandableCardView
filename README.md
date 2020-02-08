@@ -5,7 +5,7 @@ I tried making the library as functional for others but there might be some elem
 
 # ExpandableCardView
 
-[ ![Download](https://api.bintray.com/packages/alespero/ExpandableCardView/ExpandableCardView/images/download.svg?version=0.8) ](https://jitpack.io/#Stjinchan/ExpandableCardView/)
+[![](https://jitpack.io/v/Stjinchan/ExpandableCardView.svg)](https://jitpack.io/#Stjinchan/ExpandableCardView)
 
 ![Example Gif](demo.gif)
 
