@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -178,7 +177,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     }
 
-    private fun expand() {
+    fun expand() {
         val initialHeight = card_layout.height
         if (!isMoving) {
             previousHeight = initialHeight
@@ -228,7 +227,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         return totalHeight
     }
 
-    private fun collapse() {
+    fun collapse() {
         val initialHeight = card_layout.measuredHeight
         if (initialHeight - previousHeight != 0) {
             animateViews(initialHeight,
