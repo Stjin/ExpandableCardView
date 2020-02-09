@@ -13,10 +13,6 @@ An Android library that lets you create in a simple, fast and hassle-free way a 
 
 This component follows the [Material Design Guidelines](https://material.io/guidelines/).
 
-## Searching for someone who wants to mantain this library! If you're interested, please send me an email.
-
-### Important: due to time issues, in the near future there will not be any kind of updates or fixes. PR however will be reviewed and very much appreciated.
-
 ## Demo
 
 Get it on the [Google Play Store](https://play.google.com/store/apps/details?id=com.alessandrosperotti.expandablecardviewexample).
@@ -138,9 +134,6 @@ card.setOnExpandedListener { view, isExpanded ->
     Toast.makeText(applicationContext, if(isChecked) "Checked!" else "Not checked!", Toast.LENGTH_SHORT).show()
  }
 ```
-## Contribute
-
-This library is still in its early stages, so feel free to contribute. I will review any Pull Request in 24-48 hours.
 
 ## License
 
