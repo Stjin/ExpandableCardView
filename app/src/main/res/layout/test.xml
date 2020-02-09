@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/expand_card_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -17,16 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/module_always_on_display_CardText"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="false"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/card_module_always_on_display_enable_switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/card_module_always_on_display_enable_switch"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="false"
-        android:layout_marginEnd="16dp" />
 
 </RelativeLayout>

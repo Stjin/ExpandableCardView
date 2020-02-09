@@ -62,7 +62,6 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var cardRadius: Float = 4f
     private var cardElevation: Float = 4f
     private var cardRipple: Boolean = false
-    private var fullHeight: Boolean = false
     private var expandableCardTitleBold: Boolean = false
     private var iconDrawable: Drawable? = null
 
@@ -118,7 +117,6 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         animDuration = typedArray.getInteger(R.styleable.ExpandableCardView_animationDuration, DEFAULT_ANIM_DURATION).toLong()
         startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false)
         cardRipple = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardRipple, false)
-        fullHeight = typedArray.getBoolean(R.styleable.ExpandableCardView_fullHeight, false)
         expandableCardTitleBold = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardTitleBold, false)
         cardStrokeColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeColor, android.R.color.transparent)
         cardArrowColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardArrowColor, android.R.color.black)
@@ -184,12 +182,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         }
 
 
-        val targetHeight = if (fullHeight) {
-            getFullHeight(card_layout)
-        } else{
-            card_layout.measure(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            card_layout.measuredHeight
-        }
+        val targetHeight = getFullHeight(card_layout)
 
         if (targetHeight - initialHeight != 0) {
             animateViews(initialHeight,
@@ -214,14 +207,12 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         val numberOfChildren = layout.childCount
         for (i in 0 until numberOfChildren) {
             val child = layout.getChildAt(i)
-            totalHeight += if (child is ViewGroup) {
-                getFullHeight(child)
-            } else {
-                val desiredWidth = MeasureSpec.makeMeasureSpec(layout.width,
-                        MeasureSpec.AT_MOST)
-                child.measure(desiredWidth, MeasureSpec.UNSPECIFIED)
-                child.measuredHeight
-            }
+
+            val desiredWidth = MeasureSpec.makeMeasureSpec(layout.width,
+                    MeasureSpec.AT_MOST)
+            child.measure(desiredWidth, MeasureSpec.UNSPECIFIED)
+            child.measuredHeight
+            totalHeight+=child.measuredHeight
         }
         layout.visibility = initialVisibility
         return totalHeight

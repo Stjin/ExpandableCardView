@@ -32,12 +32,12 @@ implementation 'com.github.Stjinchan:ExpandableCardView:1.1.2'
 
 ### Beta
 ```gradle
-implementation 'com.github.Stjinchan:ExpandableCardView:1.2.0-beta01'
+implementation 'com.github.Stjinchan:ExpandableCardView:1.2.0-beta05'
 ```
 
 ```
-This is a beta, introducing ```app:fullHeight``` as a workaround for the [Innerview issue](https://github.com/AleSpero/ExpandableCardView/issues/9)
-I hope to fix this in the future and might remove this attribute
+This is a beta, introducing a different way of calculating inner_view height as a fix for the [Innerview issue](https://github.com/AleSpero/ExpandableCardView/issues/9)
+I am still testing if this works as intended
 ```
 
 Or get the aar in the [Releases](https://github.com/Stjinchan/ExpandableCardView/releases) section.
