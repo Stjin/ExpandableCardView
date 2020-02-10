@@ -301,16 +301,11 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
                 }
 
                 override fun onAnimationEnd(p0: Animation?) {
-                    card_switch.isClickable = animationType != EXPANDING
-                    card_switch.isEnabled = animationType != EXPANDING
+                    card_switch.visibility = if (animationType != EXPANDING) View.VISIBLE else View.GONE
                 }
 
                 override fun onAnimationStart(p0: Animation?) {
-                    if (animationType != EXPANDING) {
-                        card_switch.isEnabled = animationType != EXPANDING
-                    }
-                    card_switch.isClickable = animationType != EXPANDING
-
+                    card_switch.visibility = if (animationType != EXPANDING) View.INVISIBLE else View.VISIBLE
                 }
             })
         }

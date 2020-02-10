@@ -28,7 +28,7 @@ implementation 'com.github.Stjinchan:ExpandableCardView:1.1.2'
 
 ### Beta
 ```gradle
-implementation 'com.github.Stjinchan:ExpandableCardView:1.2.0-beta05'
+implementation 'com.github.Stjinchan:ExpandableCardView:1.2.0-beta06'
 ```
 
 ```
