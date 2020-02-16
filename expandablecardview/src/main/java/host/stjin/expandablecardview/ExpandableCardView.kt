@@ -291,7 +291,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
             else
                 AlphaAnimation(0f, 1f)
             switchAnimation.duration = animDuration
-            switchAnimation.fillAfter = true
+            switchAnimation.fillAfter = false
             card_switch.startAnimation(switchAnimation)
 
             // Disable/Set clickable to prevent the toggle from working when the card is expanded

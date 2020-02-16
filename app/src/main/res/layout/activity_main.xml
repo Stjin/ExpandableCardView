@@ -109,6 +109,7 @@
             android:layout_marginBottom="10dp"
             app:animationDuration="900"
             app:expandOnClick="true"
+            app:showSwitch="true"
             app:icon="@drawable/ic_dates"
             app:inner_view="@layout/test"
             app:title="Lorem" />
