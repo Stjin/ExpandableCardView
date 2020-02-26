@@ -23,17 +23,7 @@ First of all, include the dependency in your app build.gradle:
 
 ### Stable
 ```gradle
-implementation 'com.github.Stjinchan:ExpandableCardView:1.1.2'
-```
-
-### Beta
-```gradle
-implementation 'com.github.Stjinchan:ExpandableCardView:1.2.0-beta06'
-```
-
-```
-This is a beta, introducing a different way of calculating inner_view height as a fix for the [Innerview issue](https://github.com/AleSpero/ExpandableCardView/issues/9)
-I am still testing if this works as intended
+implementation 'com.github.Stjinchan:ExpandableCardView:1.2.1'
 ```
 
 Or get the aar in the [Releases](https://github.com/Stjinchan/ExpandableCardView/releases) section.
@@ -75,14 +65,15 @@ If you want some basic Expandable Card without any custom behaviour, setting the
 ```
 app:expandOnClick="true"
 app:expandableCardRipple="true"
-app:expandableCardRadius="100"
-app:expandableCardStrokeWidth="15"
-app:expandableCardElevation="70"
+app:expandableCardRadius="6dp"
+app:expandableCardStrokeWidth="2dp"
+app:expandableCardElevation="4dp"
 app:expandableCardStrokeColor="@color/colorAccent"
 app:expandableCardArrowColor="@color/colorAccent"
 app:expandableCardTitleColor="@color/colorAccent"
+app:expandableCardColor ="@color/colorAccent"
 app:expandableCardTitleBold="true"
-app:expandableCardTitleSize="30"
+app:expandableCardTitleSize="14sp"
 app:animationDuration="900"
 app:startExpanded="true"
 app:showSwitch="true"
