@@ -10,12 +10,13 @@
         <attr name="startExpanded" format="boolean"/>
         <attr name="expandableCardRipple" format="boolean"/>
         <attr name="expandableCardTitleBold" format="boolean"/>
-        <attr name="expandableCardStrokeWidth" format="integer"/>
-        <attr name="expandableCardTitleSize" format="float"/>
+        <attr name="expandableCardStrokeWidth" format="dimension"/>
+        <attr name="expandableCardTitleSize" format="dimension"/>
+        <attr name="expandableCardColor" format="reference"/>
         <attr name="expandableCardStrokeColor" format="reference"/>
         <attr name="expandableCardArrowColor" format="reference"/>
         <attr name="expandableCardTitleColor" format="reference"/>
-        <attr name="expandableCardElevation" format="float"/>
-        <attr name="expandableCardRadius" format="integer"/>
+        <attr name="expandableCardElevation" format="dimension"/>
+        <attr name="expandableCardRadius" format="dimension"/>
     </declare-styleable>
 </resources>

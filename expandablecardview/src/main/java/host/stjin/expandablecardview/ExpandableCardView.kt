@@ -54,11 +54,12 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     private var typedArray: TypedArray? = null
     private var innerViewRes: Int = 0
+    private var cardColor: Int = android.R.color.transparent
     private var cardStrokeColor: Int = android.R.color.transparent
     private var cardArrowColor: Int = android.R.color.darker_gray
     private var cardTextColor: Int = android.R.color.darker_gray
-    private var cardStrokeWidth: Int = 0
-    private var cardTitleSize: Float = 0f
+    private var cardStrokeWidth: Float = 0f
+    private var cardTitleSize: Float = 70f
     private var cardRadius: Float = 4f
     private var cardElevation: Float = 4f
     private var cardRipple: Boolean = false
@@ -118,12 +119,13 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         startExpanded = typedArray.getBoolean(R.styleable.ExpandableCardView_startExpanded, false)
         cardRipple = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardRipple, false)
         expandableCardTitleBold = typedArray.getBoolean(R.styleable.ExpandableCardView_expandableCardTitleBold, false)
+        cardColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardColor, android.R.color.transparent)
         cardStrokeColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeColor, android.R.color.transparent)
         cardArrowColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardArrowColor, android.R.color.black)
-        cardStrokeWidth = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeWidth, 0)
-        cardTitleSize = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardTitleSize, 0f)
-        cardElevation = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardElevation, 4f)
-        cardRadius = typedArray.getFloat(R.styleable.ExpandableCardView_expandableCardRadius, 4f)
+        cardStrokeWidth = typedArray.getDimension(R.styleable.ExpandableCardView_expandableCardStrokeWidth, 0f)
+        cardTitleSize = typedArray.getDimension(R.styleable.ExpandableCardView_expandableCardTitleSize, 70f)
+        cardElevation = typedArray.getDimension(R.styleable.ExpandableCardView_expandableCardElevation, 4f)
+        cardRadius = typedArray.getDimension(R.styleable.ExpandableCardView_expandableCardRadius, 4f)
         cardTextColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardTitleColor, android.R.color.darker_gray)
 
         typedArray.recycle()
@@ -131,13 +133,15 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
 
     override fun onFinishInflate() {
         super.onFinishInflate()
+        val density = resources.displayMetrics.density;
 
         //Setting attributes
         if (!TextUtils.isEmpty(title)) card_title.text = title
         if (cardTextColor != android.R.color.darker_gray) card_title.setTextColor(cardTextColor)
         if (cardStrokeColor != android.R.color.transparent) card_layout.strokeColor = cardStrokeColor
-        if (cardStrokeWidth != 0) card_layout.strokeWidth = cardStrokeWidth
-        if (cardTitleSize != 0f) card_title.textSize = cardTitleSize
+        if (cardColor != android.R.color.transparent) card_layout.setCardBackgroundColor(cardColor)
+        if (cardStrokeWidth != 0f) card_layout.strokeWidth = cardStrokeWidth.toInt()
+        if (cardTitleSize != 0f) card_title.textSize = cardTitleSize / density
         if (!cardRipple) card_layout.rippleColor = ContextCompat.getColorStateList(context, android.R.color.transparent)
 
         if (expandableCardTitleBold) {
@@ -145,8 +149,8 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         }
 
         card_switch.visibility = if (showSwitch) View.VISIBLE else View.GONE
-        card_layout.radius = Utils.convertPixelsToDp(cardRadius, context)
-        card_layout.cardElevation = Utils.convertPixelsToDp(cardElevation, context)
+        card_layout.radius = cardRadius
+        card_layout.cardElevation = cardElevation
 
 
         if (cardArrowColor != android.R.color.black) card_arrow.setColorFilter(cardArrowColor, android.graphics.PorterDuff.Mode.SRC_IN)
