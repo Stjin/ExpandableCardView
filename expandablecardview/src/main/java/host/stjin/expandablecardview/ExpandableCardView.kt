@@ -59,7 +59,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
     private var cardArrowColor: Int = android.R.color.darker_gray
     private var cardTextColor: Int = android.R.color.darker_gray
     private var cardStrokeWidth: Float = 0f
-    private var cardTitleSize: Float = 70f
+    private var cardTitleSize: Float = 0f
     private var cardRadius: Float = 4f
     private var cardElevation: Float = 4f
     private var cardRipple: Boolean = false
@@ -123,7 +123,7 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         cardStrokeColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardStrokeColor, android.R.color.transparent)
         cardArrowColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardArrowColor, android.R.color.black)
         cardStrokeWidth = typedArray.getDimension(R.styleable.ExpandableCardView_expandableCardStrokeWidth, 0f)
-        cardTitleSize = typedArray.getDimension(R.styleable.ExpandableCardView_expandableCardTitleSize, 70f)
+        cardTitleSize = typedArray.getDimension(R.styleable.ExpandableCardView_expandableCardTitleSize, 0f)
         cardElevation = typedArray.getDimension(R.styleable.ExpandableCardView_expandableCardElevation, 4f)
         cardRadius = typedArray.getDimension(R.styleable.ExpandableCardView_expandableCardRadius, 4f)
         cardTextColor = typedArray.getInteger(R.styleable.ExpandableCardView_expandableCardTitleColor, android.R.color.darker_gray)

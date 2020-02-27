@@ -23,7 +23,7 @@ First of all, include the dependency in your app build.gradle:
 
 ### Stable
 ```gradle
-implementation 'com.github.Stjinchan:ExpandableCardView:1.2.1'
+implementation 'com.github.Stjinchan:ExpandableCardView:1.2.2'
 ```
 
 Or get the aar in the [Releases](https://github.com/Stjinchan/ExpandableCardView/releases) section.
