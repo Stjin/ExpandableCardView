@@ -3,4 +3,9 @@
     <color name="colorPrimary">#1B37A5</color>
     <color name="colorPrimaryDark">#1C339B</color>
     <color name="colorAccent">#1976d2</color>
+    <color name="white">@color/md_white_1000</color>
+    <color name="md_white_1000">#ffffff</color>
+    <color name="md_black_1000">#000000</color>
+    <color name="BlackWhiteColor">@color/md_black_1000</color>
+    <color name="colorAccentAtNightWhiteAtDay">@color/white</color>
 </resources>

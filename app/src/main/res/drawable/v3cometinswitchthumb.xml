@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="@color/v3cometinswitchtint" />
+
+    <size
+        android:width="12dp"
+        android:height="12dp" />
+
+    <!-- results in the track looking smaller than the thumb -->
+    <stroke
+        android:width="8dp"
+        android:color="@android:color/transparent" />
+</shape>
