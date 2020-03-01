@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.os.Handler
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -164,8 +165,11 @@ class ExpandableCardView @JvmOverloads constructor(context: Context, attrs: Attr
         setInnerView(innerViewRes)
 
         if (startExpanded) {
-            animDuration = 0
-            expand()
+            val handler = Handler()
+            handler.postDelayed({
+                expand()
+            }, 200)
+
         }
 
         if (expandOnClick) {
